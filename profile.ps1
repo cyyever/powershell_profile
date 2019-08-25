@@ -7,6 +7,7 @@ if (!(Get-Module -ListAvailable -Name z)) {
  start-process -wait -verb runAs -argumentlist "Install-Module -AllowClobber -Name z"
 }
 
-if (powershell.exe -File  (Join-Path -Path  "$PSScriptRoot" -ChildPath "eink.ps1")) {
+powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "eink.ps1")
+if($?) {
   $env:eink_screen=1
 }
