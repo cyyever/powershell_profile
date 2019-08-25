@@ -2,3 +2,7 @@ $PSReadLineProfilePath=Join-Path -Path  "$PSScriptRoot" -ChildPath "PSReadLinePr
 if (!(Test-Path "$PSReadLineProfilePath")) {
   Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PowerShell/PSReadLine/master/PSReadLine/SamplePSReadLineProfile.ps1" -OutFile "$PSReadLineProfilePath"
 }
+
+if (!(Get-Module -ListAvailable -Name z)) {
+ start-process -wait -verb runAs -argumentlist "Install-Module -AllowClobber -Name z"
+}
