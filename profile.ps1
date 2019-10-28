@@ -7,6 +7,8 @@ if (!(Get-Module -ListAvailable -Name z)) {
   Install-Module -AllowClobber -Scope CurrentUser -Name z
 }
 
+$env:Path += ";${HOME}/opt/bin"
+
 powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "eink.ps1")
 if($?) {
   $env:eink_screen=1
@@ -14,4 +16,3 @@ if($?) {
 if ((Get-Command nvim)) {
   Set-Alias -Name vim -Value nvim
 }
-$env:Path += ";${HOME}/opt/bin"
