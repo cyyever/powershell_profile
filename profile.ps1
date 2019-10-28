@@ -11,3 +11,7 @@ powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "ein
 if($?) {
   $env:eink_screen=1
 }
+if ((Get-Command nvim)) {
+  Set-Alias -Name vim -Value nvim
+}
+$env:Path += ";${HOME}/opt/bin"
