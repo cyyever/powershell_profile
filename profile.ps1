@@ -22,8 +22,8 @@ if ((Get-Command nvim)) {
 
 if ((Test-Path "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json")) {
   if($env:eink_screen) {
-    Get-Content $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json | %{$_ -replace "^#(.*colorScheme.*:.*eink.*)$", "$1"} | Out-File -Encoding $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json
+    Get-Content $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json | %{$_ -replace "^#(.*colorScheme.*:.*eink.*)$", "$1"} | Out-File -Encoding utf8 $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json
   } else {
-    Get-Content $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json  | %{$_ -replace "^.*colorScheme.*:.*eink.*$", "#$&"} | Out-File -Encoding $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json
+    Get-Content $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json  | %{$_ -replace "^.*colorScheme.*:.*eink.*$", "#$&"} | Out-File -Encoding utf8 $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json
   }
 }
