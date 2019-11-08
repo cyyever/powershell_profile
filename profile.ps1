@@ -16,8 +16,9 @@ powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "ein
 if($?) {
   $env:eink_screen=1
 }
-if ((Get-Command nvim)) {
-  Set-Alias -Name vim -Value nvim
+
+if($env:eink_screen) {
+ 'None', 'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | foreach { Set-PSReadLineOption -Colors @{ $_= [ConsoleColor]::Black } }
 }
 
 if ((Test-Path "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json")) {
@@ -29,4 +30,8 @@ if ((Test-Path "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bb
   }
   cp -Force  $tmp.FullName $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json
   Remove-Variable tmp
+}
+
+if ((Get-Command nvim)) {
+  Set-Alias -Name vim -Value nvim
 }
