@@ -7,9 +7,13 @@ if ((Test-Path "$PSReadLineProfilePath")) {
   . "$PSReadLineProfilePath"
 }
 
-if (!(Get-Module -ListAvailable -Name z)) {
-  Install-Module -AllowClobber -Scope CurrentUser -Name z
+ 'z',  'PSScriptAnalyzer' | foreach
+ {
+if (!(Get-Module -ListAvailable -Name $_)) {
+  Install-Module -AllowClobber -Scope CurrentUser -Name $_
 }
+ }
+
 
 $env:Path += ";${HOME}/opt/bin"
 powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "eink.ps1")
