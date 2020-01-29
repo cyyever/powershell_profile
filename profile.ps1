@@ -7,8 +7,7 @@ if ((Test-Path "$PSReadLineProfilePath")) {
   . "$PSReadLineProfilePath"
 }
 
- 'z',  'PSScriptAnalyzer' | foreach
- {
+ 'z',  'PSScriptAnalyzer' | foreach {
 if (!(Get-Module -ListAvailable -Name $_)) {
   Install-Module -AllowClobber -Scope CurrentUser -Name $_
 }
