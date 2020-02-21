@@ -38,3 +38,7 @@ if ((Test-Path "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bb
 if ((Get-Command nvim)) {
   Set-Alias -Name vim -Value nvim
 }
+
+function gitclone {
+  git clone --recursive @args
+  }
