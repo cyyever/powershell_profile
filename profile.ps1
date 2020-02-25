@@ -17,16 +17,20 @@ if ($env:eink_screen) {
     'None', 'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | foreach { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
 }
 
-if ((Test-Path "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json")) {
-    $tmp = New-TemporaryFile
-    if ($env:eink_screen) {
-        Get-Content $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json | % { $_ -replace "^(.*colorScheme.*:.*)dark(.*)$", '$1eink$2' } | Out-File -Encoding utf8  -FilePath $tmp.FullName
+$ms_terminal_profile = "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json"
+if ((Test-Path $ms_terminal_profile)) {
+    $old_scheme = 'eink'
+    $new_scheme = 'dark'
+    if ($env:eink_screen   ) {
+        $old_scheme = 'dark'
+        $new_scheme = 'eink'
     }
-    else {
-        Get-Content $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json | % { $_ -replace "^(.*colorScheme.*:.*)eink(.*)$", '$1dark$2' } | Out-File -Encoding utf8 -FilePath $tmp.FullName
+    if (!( Select-String -Path $ms_terminal_profile -Pattern "^(.*colorScheme.*:.*)${new_scheme}(.*)$")) {
+        $tmp = New-TemporaryFile
+        Get-Content $ms_terminal_profile | % { $_ -replace "^(.*colorScheme.*:.*)${old_scheme}(.*)$", '$1' + $new_scheme + '$2' } | Out-File -Encoding utf8  -FilePath $tmp.FullName
+        cp -Force  $tmp.FullName $ms_terminal_profile
+        Remove-Variable tmp
     }
-    cp -Force  $tmp.FullName $env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json
-    Remove-Variable tmp
 }
 
 if ((Get-Command nvim)) {
