@@ -7,7 +7,7 @@ if ((Test-Path "$PSReadLineProfilePath")) {
     . "$PSReadLineProfilePath"
 }
 
-$env:Path += ";${HOME}/opt/bin"
+$env:Path = "${HOME}/opt/bin;" + $env:Path
 powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "eink.ps1")
 if ($?) {
     $env:eink_screen = 1
