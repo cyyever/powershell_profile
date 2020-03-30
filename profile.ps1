@@ -14,7 +14,7 @@ if ($?) {
 }
 
 if ($env:eink_screen) {
-    'None', 'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | foreach { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
+    'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | foreach { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
 }
 
 $ms_terminal_profile = "$env:LocalAppData\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\profiles.json"
@@ -27,7 +27,7 @@ if ((Test-Path $ms_terminal_profile)) {
     }
     if (!( Select-String -Path $ms_terminal_profile -Pattern "^(.*colorScheme.*:.*)${new_scheme}(.*)$")) {
         $tmp = New-TemporaryFile
-        Get-Content $ms_terminal_profile | % { $_ -replace "^(.*colorScheme.*:.*)${old_scheme}(.*)$", '$1' + $new_scheme + '$2' } | Out-File -Encoding utf8  -FilePath $tmp.FullName
+        Get-Content $ms_terminal_profile | % { $_ -replace "^(.*colorScheme.*:.*)${old_scheme}(.*)$", ('$1' + $new_scheme + '$2') } | Out-File -Encoding utf8  -FilePath $tmp.FullName
         cp -Force  $tmp.FullName $ms_terminal_profile
         Remove-Variable tmp
     }
