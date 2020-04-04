@@ -37,6 +37,12 @@ if ((Get-Command nvim)) {
     Set-Alias -Name vim -Value nvim
 }
 
-function gitclone {
-    git clone --recursive @args
+if ((Get-Command git)) {
+    function gitclone {
+        git clone --recursive @args
+    }
+    function gitsubmoduleupdate {
+        git submodule update --remote --merge
+    }
+    git config --global core.autocrlf true
 }
