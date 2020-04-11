@@ -45,4 +45,5 @@ if ((Get-Command git)) {
         git submodule update --remote --merge
     }
     git config --global core.autocrlf true
+    Import-Module posh-git
 }
