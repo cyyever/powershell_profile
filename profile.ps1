@@ -47,3 +47,8 @@ if ((Get-Command git)) {
     git config --global core.autocrlf true
     Import-Module posh-git
 }
+if ((Get-Command lua5.1.exe)) {
+    if ((Test-Path "${HOME}/opt/z.lua")) {
+        iex ($(lua "${HOME}/opt/z.lua" --init powershell) -join "`n")
+    }
+}
