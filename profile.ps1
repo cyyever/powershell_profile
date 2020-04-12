@@ -49,6 +49,6 @@ if ((Get-Command git)) {
 }
 if ((Get-Command lua5.1.exe)) {
     if ((Test-Path "${HOME}/opt/z.lua")) {
-        iex ($(lua5.1.exe "${HOME}/opt/z.lua" --init powershell) -join "`n")
+        iex ($(lua5.1.exe "${HOME}/opt/z.lua/z.lua" --init powershell) -join "`n")
     }
 }
