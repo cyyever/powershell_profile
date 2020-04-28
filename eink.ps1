@@ -5,7 +5,7 @@ function Decode {
     return ""
 }
 #"""Get-WmiObject Win32_DesktopMonitor            
-ForEach ($Monitor in Get-WmiObject WmiMonitorID -Namespace root\wmi) {
+ForEach ($Monitor in Get-CimInstance -Namespace root\wmi -ClassName WmiMonitorId) {
     if ((Decode $Monitor.UserFriendlyName -notmatch 0).contains("Paperlike")) {
     exit 0
       }
