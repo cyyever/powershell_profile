@@ -39,7 +39,7 @@ if ((Get-Command nvim)) {
 
 if ((Get-Command git)) {
     function gitclone {
-        git clone --recursive @args
+      git clone --recursive --recurse-submodules --remote-submodules @args
     }
     function gitsubmoduleupdate {
         git submodule update --remote --merge
