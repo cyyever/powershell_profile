@@ -39,14 +39,19 @@ if ((Get-Command nvim)) {
 
 if ((Get-Command git)) {
     function gitclone {
-      git clone --recursive --recurse-submodules --remote-submodules @args
+        git clone --recursive  @args
     }
     function gitsubmoduleupdate {
         git submodule update --remote --merge
     }
+    function gitpull {
+        git pull 
+        gitsubmoduleupdate
+    }
     git config --global core.autocrlf true
     Import-Module posh-git
 }
+
 if ((Get-Command lua5.1.exe)) {
     if ((Test-Path "${HOME}/opt/z.lua")) {
         iex ($(lua5.1.exe "${HOME}/opt/z.lua/z.lua" --init powershell) -join "`n")
