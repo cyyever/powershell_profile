@@ -45,7 +45,7 @@ if ((Get-Command git)) {
         git submodule update --remote --merge
     }
     function gitpull {
-        git pull 
+        git pull
         gitsubmoduleupdate
     }
     git config --global core.autocrlf true
@@ -56,4 +56,10 @@ if ((Get-Command lua5.1.exe)) {
     if ((Test-Path "${HOME}/opt/z.lua")) {
         iex ($(lua5.1.exe "${HOME}/opt/z.lua/z.lua" --init powershell) -join "`n")
     }
+}
+
+if ((Get-Command openconnect)) {
+  function connect-ntu-vpn {
+    openconnect --protocol=pulse https://ntuvpn.ntu.edu.sg -u yuanyuan.chen --form-entry pulse_realm_choice:realm_choice=Staff -b
+  }
 }
