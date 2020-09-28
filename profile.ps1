@@ -33,11 +33,11 @@ if ((Test-Path $ms_terminal_profile)) {
     }
 }
 
-if ((Get-Command nvim)) {
+if ((Get-Command nvim -ErrorAction SilentlyContinue)) {
     Set-Alias -Name vim -Value nvim
 }
 
-if ((Get-Command git)) {
+if ((Get-Command git -ErrorAction SilentlyContinue)) {
     function gitclone {
         git clone --recursive  @args
     }
@@ -52,14 +52,14 @@ if ((Get-Command git)) {
     Import-Module posh-git
 }
 
-if ((Get-Command lua5.1.exe)) {
+if ((Get-Command lua5.1.exe -ErrorAction SilentlyContinue)) {
     if ((Test-Path "${HOME}/opt/z.lua")) {
         iex ($(lua5.1.exe "${HOME}/opt/z.lua/z.lua" --init powershell) -join "`n")
     }
 }
 
-if ((Get-Command openconnect)) {
-  function connect-ntu-vpn {
-    openconnect --protocol=pulse https://ntuvpn.ntu.edu.sg -u yuanyuan.chen --form-entry pulse_realm_choice:realm_choice=Staff -b
-  }
+if ((Get-Command openconnect -ErrorAction SilentlyContinue)) {
+    function connect-ntu-vpn {
+        openconnect --protocol=pulse https://ntuvpn.ntu.edu.sg -u yuanyuan.chen --form-entry pulse_realm_choice:realm_choice=Staff -b
+    }
 }
