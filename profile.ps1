@@ -63,3 +63,9 @@ if ((Get-Command openconnect -ErrorAction SilentlyContinue)) {
         openconnect --protocol=pulse https://ntuvpn.ntu.edu.sg -u yuanyuan.chen --form-entry pulse_realm_choice:realm_choice=Staff -b
     }
 }
+
+if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
+    function ssh {
+        ssh -o SendEnv=eink_screen
+    }
+}
