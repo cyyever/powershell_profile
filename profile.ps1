@@ -65,7 +65,7 @@ if ((Get-Command openconnect -ErrorAction SilentlyContinue)) {
 }
 
 if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
-    function ssh {
+    function sshmine {
         ssh -o SendEnv=eink_screen
     }
 }
