@@ -39,7 +39,7 @@ if ((Get-Command nvim -ErrorAction SilentlyContinue)) {
 
 if ((Get-Command git -ErrorAction SilentlyContinue)) {
     function gitclone {
-        git clone --recursive  @args
+        git clone --recursive @args
     }
     function gitsubmoduleupdate {
         git submodule update --remote --merge
@@ -66,7 +66,7 @@ if ((Get-Command openconnect -ErrorAction SilentlyContinue)) {
 
 if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
     function sshmine {
-        ssh -o SendEnv=eink_screen
+        ssh -o SendEnv=eink_screen @args
     }
 }
 
