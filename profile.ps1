@@ -64,9 +64,9 @@ if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
     }
 }
 
-function  pyinstall {
-    python3 setup.py build_ext --inplace
-    python3 setup.py install --force
+function pyinstall {
+    python setup.py build_ext --inplace
+    python setup.py install --force
 }
 
 function pycoverage_run {
