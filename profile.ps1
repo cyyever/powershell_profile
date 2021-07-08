@@ -71,5 +71,4 @@ if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
 }
 
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineKeyHandler  -Chord  RightArrow -Function AcceptSuggestion
-Set-PSReadLineKeyHandler  -Chord  Ctrl+RightArrow  -Function AcceptNextSuggestionWord
+Set-PSReadLineKeyHandler  -Chord  Ctrl+RightArrow  -Function AcceptSuggestion
