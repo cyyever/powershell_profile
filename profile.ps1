@@ -58,18 +58,28 @@ if ((Get-Command lua5.1.exe -ErrorAction SilentlyContinue)) {
     }
 }
 
-if ((Get-Command openconnect -ErrorAction SilentlyContinue)) {
-    function connect-ntu-vpn {
-        openconnect --protocol=pulse https://ntuvpn.ntu.edu.sg -u yuanyuan.chen --form-entry pulse_realm_choice:realm_choice=Staff -b
-    }
-}
-
 if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
     function sshmine {
         ssh -o SendEnv=eink_screen @args
     }
 }
 
+function  pyinstall {
+    python3 setup.py build_ext --inplace
+    python3 setup.py install --force
+}
+
+function pycoverage_run {
+    if (Test-Path  ~/opt/cli_tool_configs/coveragerc -PathType leaf) {
+        python (which coverage) run --concurrency=multiprocessing --rcfile=(realpath ~/opt/cli_tool_configs/coveragerc) -m pytest --capture=tee-sys
+    }
+    else {
+        python (which coverage) run --concurrency=multiprocessing -m pytest --capture=tee-sys
+    }
+    python (which coverage) combine
+    python (which coverage) report
+    python (which coverage) html
+}
+
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineKeyHandler  -Chord  Ctrl+RightArrow  -Function AcceptNextSuggestionWord
-Set-PSReadLineKeyHandler  -Chord  Tab+RightArrow  -Function AcceptSuggestion
