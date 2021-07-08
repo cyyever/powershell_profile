@@ -70,15 +70,15 @@ function pyinstall {
 }
 
 function pycoverage_run {
-    if (Test-Path  ~/opt/cli_tool_configs/coveragerc -PathType leaf) {
-        python (which coverage) run --concurrency=multiprocessing --rcfile=(realpath ~/opt/cli_tool_configs/coveragerc) -m pytest --capture=tee-sys
+    if (Test-Path $home/opt/cli_tool_configs/coveragerc -PathType leaf) {
+        coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest --capture=tee-sys
     }
     else {
-        python (which coverage) run --concurrency=multiprocessing -m pytest --capture=tee-sys
+        coverage run --concurrency=multiprocessing -m pytest --capture=tee-sys
     }
-    python (which coverage) combine
-    python (which coverage) report
-    python (which coverage) html
+    coverage combine
+    coverage report
+    coverage html
 }
 
 Set-PSReadLineOption -PredictionSource History
