@@ -8,9 +8,21 @@ if ((Test-Path "$PSReadLineProfilePath")) {
 }
 
 $env:Path = "${HOME}/opt/bin;" + $env:Path
-powershell.exe -NoProfile -File (Join-Path -Path "$PSScriptRoot" -ChildPath "eink.ps1")
-if ($?) {
-    $env:eink_screen = 1
+
+if (!$env:eink_screen) {
+  function Decode {
+    If ($args[0] -is [System.Array]) {
+      return  [System.Text.Encoding]::ASCII.GetString($args[0])
+    }
+    return ""
+  }
+#"""Get-WmiObject Win32_DesktopMonitor
+  ForEach ($Monitor in Get-CimInstance -Namespace root\wmi -ClassName WmiMonitorId) {
+    if ((Decode $Monitor.UserFriendlyName -notmatch 0).contains("Paperlike")) {
+      $env:eink_screen = 1
+        break
+    }
+  }
 }
 
 if ($env:eink_screen) {
