@@ -104,8 +104,8 @@ function pycoverage_run {
 }
 
 
-if (Test-Path C:\texlive\2021\bin\win32) {
-  $env:Path = "C:/texlive/2021/bin/win32;" + $env:Path
+if (Test-Path C:\texlive\2022\bin\win32) {
+  $env:Path = "C:/texlive/2022/bin/win32;" + $env:Path
 }
 
 Set-PSReadLineOption -PredictionSource History
