@@ -1,4 +1,4 @@
-$PSReadLineProfilePath = Join-Path -Path  "$PSScriptRoot" -ChildPath "PSReadLineProfile.ps1"
+$PSReadLineProfilePath = Join-Path -Path "$PSScriptRoot" -ChildPath "PSReadLineProfile.ps1"
 if (!(Test-Path "$PSReadLineProfilePath")) {
     Invoke-WebRequest -Uri "https://raw.githubusercontent.com/PowerShell/PSReadLine/master/PSReadLine/SamplePSReadLineProfile.ps1" -OutFile "$PSReadLineProfilePath"
 }
@@ -10,36 +10,36 @@ if ((Test-Path "$PSReadLineProfilePath")) {
 $env:Path = "${HOME}/opt/bin;" + $env:Path
 
 if (!$env:eink_screen) {
-  function Decode {
-    If ($args[0] -is [System.Array]) {
-      return  [System.Text.Encoding]::ASCII.GetString($args[0])
+    function Decode {
+        If ($args[0] -is [System.Array]) {
+            return [System.Text.Encoding]::ASCII.GetString($args[0])
+        }
+        return ""
     }
-    return ""
-  }
-#"""Get-WmiObject Win32_DesktopMonitor
-  ForEach ($Monitor in Get-CimInstance -Namespace root\wmi -ClassName WmiMonitorId) {
-    if ((Decode $Monitor.UserFriendlyName -notmatch 0).contains("Paperlike")) {
-      $env:eink_screen = 1
-        break
+    #"""Get-WmiObject Win32_DesktopMonitor
+    ForEach ($Monitor in Get-CimInstance -Namespace root\wmi -ClassName WmiMonitorId) {
+        if ((Decode $Monitor.UserFriendlyName -notmatch 0).contains("Paperlike")) {
+            $env:eink_screen = 1
+            break
+        }
     }
-  }
 }
 
 if ($env:eink_screen) {
-    'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | foreach-object { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
+    'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | ForEach-Object { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
 }
 
 $ms_terminal_profile = "$env:LocalAppData\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
 if ((Test-Path $ms_terminal_profile)) {
     $old_scheme = 'eink'
     $new_scheme = 'Gruvbox Dark'
-    if ($env:eink_screen   ) {
+    if ($env:eink_screen) {
         $old_scheme = 'Gruvbox Dark'
         $new_scheme = 'eink'
     }
     if (!( Select-String -Path $ms_terminal_profile -Pattern "^(.*colorScheme.*:.*)${new_scheme}(.*)$")) {
         $tmp = New-TemporaryFile
-        Get-Content $ms_terminal_profile | foreach-object { $_ -replace "^(.*colorScheme.*:.*)${old_scheme}(.*)$", ('$1' + $new_scheme + '$2') } | Out-File -Encoding utf8  -FilePath $tmp.FullName
+        Get-Content $ms_terminal_profile | ForEach-Object { $_ -replace "^(.*colorScheme.*:.*)${old_scheme}(.*)$", ('$1' + $new_scheme + '$2') } | Out-File -Encoding utf8  -FilePath $tmp.FullName
         cp -Force  $tmp.FullName $ms_terminal_profile
         Remove-Variable tmp
     }
@@ -83,30 +83,30 @@ function pyinstall {
 
 function pytest {
     if (Test-Path $home/opt/cli_tool_configs/coveragerc -PathType leaf) {
-        coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest
+        python -m coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest
     }
     else {
-        coverage run --concurrency=multiprocessing -m pytest
+        python -m coverage run --concurrency=multiprocessing -m pytest
     }
 }
 
 
 function pycoverage_run {
     if (Test-Path $home/opt/cli_tool_configs/coveragerc -PathType leaf) {
-        coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest --capture=tee-sys
+        python -m coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest --capture=tee-sys
     }
     else {
-        coverage run --concurrency=multiprocessing -m pytest --capture=tee-sys
+        python -m coverage run --concurrency=multiprocessing -m pytest --capture=tee-sys
     }
-    coverage combine
-    coverage report
-    coverage html
+    python -m coverage combine
+    python -m coverage report
+    python -m coverage html
 }
 
 
 if (Test-Path C:\texlive\2022\bin\win32) {
-  $env:Path = "C:/texlive/2022/bin/win32;" + $env:Path
+    $env:Path = "C:/texlive/2022/bin/win32;" + $env:Path
 }
 
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineKeyHandler  -Chord  Ctrl+RightArrow  -Function AcceptNextSuggestionWord
+Set-PSReadLineKeyHandler -Chord Ctrl+RightArrow -Function AcceptNextSuggestionWord
