@@ -78,7 +78,7 @@ if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
 
 function pyinstall {
     python setup.py build_ext --inplace
-    python setup.py install --force
+    python setup.py install --force --user
 }
 
 function pytest {
