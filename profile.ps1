@@ -81,6 +81,16 @@ function pyinstall {
     python setup.py install --force
 }
 
+function pytest {
+    if (Test-Path $home/opt/cli_tool_configs/coveragerc -PathType leaf) {
+        coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest
+    }
+    else {
+        coverage run --concurrency=multiprocessing -m pytest
+    }
+}
+
+
 function pycoverage_run {
     if (Test-Path $home/opt/cli_tool_configs/coveragerc -PathType leaf) {
         coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest --capture=tee-sys
