@@ -19,6 +19,11 @@ if (!$env:eink_screen) {
 if ($env:eink_screen) {
     'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | ForEach-Object { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
 }
+else {
+    if ((Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
+        oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/peru.omp.json" | Invoke-Expression
+    }
+}
 
 $ms_terminal_profile = "$env:LocalAppData\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
 if ((Test-Path $ms_terminal_profile)) {
