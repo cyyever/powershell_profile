@@ -46,17 +46,6 @@ if ((Get-Command nvim -ErrorAction SilentlyContinue)) {
 }
 
 if ((Get-Command git -ErrorAction SilentlyContinue)) {
-    function gitclone {
-        git clone --recursive @args
-    }
-    function gitsubmoduleupdate {
-        git submodule update --remote --merge
-    }
-    function gitpull {
-        git pull
-        gitsubmoduleupdate
-    }
-    git config --global core.autocrlf true
     Import-Module posh-git
 }
 
