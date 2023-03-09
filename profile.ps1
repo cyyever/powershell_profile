@@ -17,7 +17,7 @@ if (!$env:eink_screen) {
 }
 
 if ($env:eink_screen) {
-    'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member' | ForEach-Object { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
+    'ContinuationPrompt', 'Emphasis', 'Error', 'Selection', 'Default', 'Comment', 'Keyword', 'String', 'Operator', 'Variable', 'Command', 'Parameter', 'Type', 'Number', 'Member', 'InlinePrediction', 'ListPrediction', 'ListPredictionSelected' | ForEach-Object { Set-PSReadLineOption -Colors @{ $_ = [ConsoleColor]::Black } }
 }
 else {
     if ((Get-Command oh-my-posh -ErrorAction SilentlyContinue)) {
@@ -66,12 +66,6 @@ if ((Get-Command lua5.1.exe -ErrorAction SilentlyContinue)) {
     }
 }
 
-if ((Get-Command ssh -ErrorAction SilentlyContinue)) {
-    function sshmine {
-        ssh -o SendEnv=eink_screen @args
-    }
-}
-
 function pyinstall {
     python setup.py build_ext --inplace
     python setup.py install --force --user
@@ -100,8 +94,8 @@ function pycoverage_run {
 }
 
 
-if (Test-Path C:\texlive\2022\bin\win32) {
-    $env:Path = "C:/texlive/2022/bin/win32;" + $env:Path
+if (Test-Path C:\texlive\2023\bin\win32) {
+    $env:Path = "C:/texlive/2023/bin/win32;" + $env:Path
 }
 
 Set-PSReadLineOption -PredictionSource History
