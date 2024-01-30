@@ -61,12 +61,7 @@ function pyinstall {
 }
 
 function pytest {
-    if (Test-Path $home/opt/cli_tool_configs/coveragerc -PathType leaf) {
-        python -m coverage run --concurrency=multiprocessing --rcfile=$home/opt/cli_tool_configs/coveragerc -m pytest
-    }
-    else {
-        python -m coverage run --concurrency=multiprocessing -m pytest
-    }
+    python -m pytest
 }
 
 
