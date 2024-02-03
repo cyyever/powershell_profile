@@ -56,8 +56,13 @@ if ((Get-Command lua5.1.exe -ErrorAction SilentlyContinue)) {
 }
 
 function pyinstall {
-    python setup.py build_ext --inplace
-    python setup.py install --force --user
+    if ((Test-Path pyproject.toml)) {
+        python -m pip install --no-build-isolation . --user --force
+    }
+    else {
+        python setup.py build_ext --inplace
+        python setup.py install --force --user
+    }
 }
 
 function pytest {
