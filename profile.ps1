@@ -87,5 +87,6 @@ if (Test-Path C:\texlive\2023\bin\win32) {
     $env:Path = "C:/texlive/2023/bin/win32;" + $env:Path
 }
 
+Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -PredictionSource History
 Set-PSReadLineKeyHandler -Chord Ctrl+RightArrow -Function AcceptNextSuggestionWord
