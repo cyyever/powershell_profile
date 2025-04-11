@@ -1,4 +1,4 @@
-$env:Path = "${HOME}/opt/bin;" + $env:Path
+$env:Path = "${HOME}/opt/bin;${HOME}/.cargo/bin" + $env:Path
 
 if (!$env:eink_screen) {
     function Decode {
@@ -83,8 +83,8 @@ function pycoverage_run {
 }
 
 
-if (Test-Path C:\texlive\2023\bin\win32) {
-    $env:Path = "C:/texlive/2023/bin/win32;" + $env:Path
+if (Test-Path C:\texlive\2025\bin\win32) {
+    $env:Path = "C:/texlive/2025/bin/win32;" + $env:Path
 }
 
 Set-PSReadLineOption -EditMode Emacs
