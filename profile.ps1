@@ -1,4 +1,4 @@
-$env:Path = "${HOME}/opt/bin;${HOME}/.cargo/bin" + $env:Path
+$env:Path = "${HOME}/opt/bin;${HOME}/.cargo/bin;" + $env:Path
 
 if (!$env:eink_screen) {
     function Decode {
