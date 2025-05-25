@@ -43,7 +43,6 @@ if ((Test-Path $ms_terminal_profile)) {
 
 if ((Get-Command nvim -ErrorAction SilentlyContinue)) {
     Set-Alias -Name vim -Value nvim
-    $env:EDITOR=nvim
 }
 
 #if ((Get-Command git -ErrorAction SilentlyContinue)) {
