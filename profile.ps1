@@ -45,9 +45,12 @@ if ((Get-Command nvim -ErrorAction SilentlyContinue)) {
     Set-Alias -Name vim -Value nvim
 }
 
-#if ((Get-Command git -ErrorAction SilentlyContinue)) {
-#    #Import-Module posh-git
-#}
+if ((Get-Command git -ErrorAction SilentlyContinue)) {
+  Import-Module posh-git
+  git config --list -f ~/.gitconfig | ForEach-Object {
+    git config --global $_
+  }
+}
 
 if ((Get-Command lua5.1.exe -ErrorAction SilentlyContinue)) {
     if ((Test-Path "${HOME}/opt/z.lua")) {
