@@ -29,11 +29,6 @@ function pycoverage_run {
     python -m coverage html
 }
 
-# Texlive
-if (Test-Path C:\texlive\2025\bin\win32) {
-    $env:Path = "C:/texlive/2025/bin/win32;" + $env:Path
-}
-
 # Fish-like PSReadLine settings
 Set-PSReadLineOption -EditMode Emacs
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin
