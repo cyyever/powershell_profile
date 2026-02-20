@@ -10,7 +10,9 @@ Set-Alias -Name vim -Value nvim
 
 
 function pyinstall {
-    if (Test-Path pyproject.toml) {
+    if (Get-Command uv -ErrorAction SilentlyContinue) {
+        uv pip install --no-build-isolation . --force-reinstall
+    } elseif (Test-Path pyproject.toml) {
         python -m pip install --no-build-isolation . --user --force
     } else {
         python setup.py build_ext --inplace
